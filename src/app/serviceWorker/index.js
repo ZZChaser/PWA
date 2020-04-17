@@ -1,5 +1,5 @@
 
-const cacheName = 'my-pwa-2';
+const cacheName = 'my-pwa-v1';
 
 const cacheList = [
   '../../../',
@@ -22,12 +22,12 @@ self.addEventListener('fetch', (event) => {
   console.log('fetch---', event)
   event.respondWith(
     caches.match(event.request).then((response) => {
-      console.log({response})
+      console.log('match', {response})
       if (response) {
         return response;
       }
       return fetch(event.request).then((response) => {
-        console.log({response})
+        console.log('fetch', {response})
         if (!response || response.status !== 200) {
           return response;
         }
