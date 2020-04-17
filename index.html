@@ -14,10 +14,10 @@
 </body>
 <script>
   if(navigator.serviceWorker) {
-    navigator.serviceWorker.register('./src/app/serviceWorker/index.js').then(register => {
+    navigator.serviceWorker.register('/sw.js').then(register => {
       console.log(`注册成功：`, {register})
     })
   }
 </script>
-<script src="./src/assets/js/index.js"></script>
+<script src="/src/assets/js/index.js"></script>
 </html>
