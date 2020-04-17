@@ -1,11 +1,11 @@
 
-const cacheName = 'my-pwa-v1';
+const cacheName = 'my-pwa-v2';
 
 const cacheList = [
-  '../../../',
-  '../../../index.html',
-  '../../../src/assets/js/index.js',
-  '../../../src/assets/icons/app_icon.svg',
+  '/PWA/',
+  '/PWA/index.html',
+  '/PWA/src/assets/js/index.js',
+  '/PWA/src/assets/icons/app_icon.svg',
 ];
 
 self.addEventListener('install', (event) => {
