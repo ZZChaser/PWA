@@ -1,6 +1,6 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
 
-const cacheStorageKey = 'my-pwa';
+const cacheStorageKey = 'my-pwa-1';
 
 const cacheList = [
   '../../../',
@@ -11,10 +11,8 @@ const cacheList = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches
-      .open(cacheStorageKey)
-      .then((cache) => cache.addAll(cacheList))
-      .then(() => self.skipWaiting())
+    caches.open(cacheStorageKey).then((cache) => cache.addAll(cacheList))
+    // .then(() => self.skipWaiting())
   );
 });
 
@@ -23,24 +21,31 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request).then((response) => {
       if (response) {
         return response;
-      } else {
-        return fetch(event.request.url);
       }
+
+      const requestClone = event.request.clone();
+      return fetch(requestClone).then((response) => {
+        if (!response || response.status !== 200) {
+          return response;
+        }
+        const responseClone = response.clone();
+        caches.open(cacheStorageKey).then((cache) => cache.put(requestClone, responseClone));
+        return response;
+      });
     })
   );
 });
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.filter((cacheName) => cacheName !== cacheStorageKey)
-            .map((cacheName) => caches.delete(cacheName))
-        );
-      })
-      .then(() => {
-        return self.clients.claim();
-      })
-  );
-});
+// self.addEventListener('activate', (event) => {
+//   event.waitUntil(
+//     caches
+//       .keys()
+//       .then((cacheNames) => {
+//         return Promise.all(
+//           cacheNames.filter((cacheName) => cacheName !== cacheStorageKey).map((cacheName) => caches.delete(cacheName))
+//         );
+//       })
+//       .then(() => {
+//         return self.clients.claim();
+//       })
+//   );
+// });
