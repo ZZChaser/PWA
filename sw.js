@@ -1,5 +1,5 @@
 
-const cacheName = 'my-pwa-v2';
+const cacheName = 'my-pwa-v3';
 
 const cacheList = [
   '/PWA/',
