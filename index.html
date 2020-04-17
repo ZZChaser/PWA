@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>first pwa</title>
+
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header>
+    <h1>Hello PWA</h1>
+  </header>
+</body>
+<script>
+  if(navigator.serviceWorker) {
+    navigator.serviceWorker.register('./src/app/serviceWorker/index.js').then(register => {
+      console.log({register})
+    })
+  }
+</script>
+<script src="./src/assets/js/index.js"></script>
+</html>
