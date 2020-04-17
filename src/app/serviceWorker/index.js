@@ -5,8 +5,8 @@ const cacheStorageKey = "my-pwa";
 const cacheList = [
   '../../../',
   '../../../index.html',
-  '../../..//assets/js/index.js',
-  '../../..//assets/icons/app_icon.svg',
+  '../../../src/assets/js/index.js',
+  '../../../src/assets/icons/app_icon.svg',
 ];
 
 self.addEventListener('install', event => {
